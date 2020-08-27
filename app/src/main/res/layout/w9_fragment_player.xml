@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_music_app">
+
+    <TextView
+        android:id="@+id/tvNameSong.Player"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/w9_player_name_song_margin_left_right"
+        android:layout_marginTop="@dimen/w9_player_name_song_margin_top"
+        android:layout_marginRight="@dimen/w9_player_name_song_margin_left_right"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:layout_centerHorizontal="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/w9_player_name_song_text_size"
+        tools:text="Day la ten bai hat, no selam ow day" />
+
+    <TextView
+        android:id="@+id/tvSinger.Player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNameSong.Player"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textSize="@dimen/w9_player_name_singer_text_size"
+        tools:text="Day la ten bai hat, no selam ow day" />
+
+
+    <com.huybui98.musicapplicationhuy.views.DvdRotateView
+        android:id="@+id/imgDvd.Player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/seekBar"
+        android:layout_below="@id/tvNameSong.Player"
+        android:layout_margin="@dimen/w9_player_image_dvd_margin"
+        android:src="@drawable/img_dvd_player" />
+
+    <TextView
+        android:id="@+id/tvCurrent.Player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/seekBar"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/w9_player_current_and_duration_margin"
+        tools:text="00:00" />
+
+    <TextView
+        android:id="@+id/tvUpdateCurrent.Player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/seekBar"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        tools:text="00:00" />
+
+    <TextView
+        android:id="@+id/tvDuration.Player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/seekBar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/w9_player_current_and_duration_margin"
+        tools:text="00:00" />
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rlPlayerBar.Player"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="@dimen/w9_player_seekbar_margin_top"
+        android:layout_marginEnd="@dimen/w9_player_seekbar_margin_right"
+        android:layout_marginBottom="@dimen/w9_player_seekbar_margin_bottom"
+        android:thumbTint="@color/background_white"
+        tools:progress="50"
+        tools:ignore="UnusedAttribute" />
+
+    <RelativeLayout
+        android:id="@+id/rlPlayerBar.Player"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/w9_player_player_bar_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/w9_player_player_bar_margin_bottom">
+
+        <ImageView
+            android:id="@+id/btnPlay.Player"
+            android:layout_width="@dimen/w9_player_player_bar_height"
+            android:layout_height="@dimen/w9_player_player_bar_height"
+            android:padding="@dimen/w9_player_icon_player_padding"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_play_button"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/btnNext.Player"
+            android:layout_width="@dimen/w9_player_player_bar_height"
+            android:layout_height="@dimen/w9_player_player_bar_height"
+            android:layout_toEndOf="@id/btnPlay.Player"
+            android:padding="@dimen/w9_player_next_icon_padding"
+            android:src="@drawable/ic_right_button"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/btnPrevious.Player"
+            android:layout_width="@dimen/w9_player_player_bar_height"
+            android:layout_height="@dimen/w9_player_player_bar_height"
+            android:layout_toStartOf="@id/btnPlay.Player"
+            android:padding="@dimen/w9_player_next_icon_padding"
+            android:src="@drawable/ic_left_button"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/btnReplay.Player"
+            android:layout_width="@dimen/w9_player_player_bar_height"
+            android:layout_height="@dimen/w9_player_player_bar_height"
+            android:layout_toEndOf="@id/btnNext.Player"
+            android:padding="@dimen/w9_player_replay_and_random_icon_padding"
+            android:src="@drawable/ic_replay_off"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/btnRandom.Player"
+            android:layout_width="@dimen/w9_player_player_bar_height"
+            android:layout_height="@dimen/w9_player_player_bar_height"
+            android:layout_toStartOf="@id/btnPrevious.Player"
+            android:padding="@dimen/w9_player_replay_and_random_icon_padding"
+            android:src="@drawable/ic_random_off"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+</RelativeLayout>

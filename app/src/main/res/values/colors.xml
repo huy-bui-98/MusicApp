@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#6200EE</color>
+    <color name="background_white">#FFFFFF</color>
+    <color name="button_login_register">#FF9900</color>
+    <color name="primary_dark">#FFFFFF</color>
+    <color name="accent">#03DAC5</color>
+    <color name="status_bar">#CCCCCC</color>
+    <color name="button_sign_up">#A1E895</color>
+    <color name="w9_background_center_color">#1D90C5</color>
+    <color name="w9_background_start_color">#95FFDE</color>
+    <color name="w9_status_bar">#5BC9D2</color>
+    <color name="w9_music_player_bar_background">#60F70FFF</color>
+    <color name="w9_background_icon_recycler_center_color">#56BBEA</color>
+    <color name="black">#000000</color>
+</resources>

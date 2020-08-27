@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/w9_card_view_margin"
+    app:cardCornerRadius="@dimen/w9_card_view_radius"
+    app:cardElevation="@dimen/w9_card_view_elevation">
+
+    <RelativeLayout
+        android:background="@drawable/w9_bg_icon_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/w9_item_recycler_height">
+
+        <com.huybui98.musicapplicationhuy.views.DvdRotateView
+            android:id="@+id/btnPlayItem"
+            android:layout_width="@dimen/w9_item_recycler_height"
+            android:layout_height="@dimen/w9_item_recycler_height"
+            android:padding="@dimen/w9_item_icon_dvd_padding"
+            android:src="@drawable/ic_dvd_player" />
+
+        <TextView
+            android:id="@+id/tvNameSongItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/w9_icon_name_song_margin_left"
+            android:layout_marginTop="@dimen/w9_icon_name_song_margin_top"
+            android:layout_marginEnd="50dp"
+            android:layout_toEndOf="@+id/btnPlayItem"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/w9_icon_name_song_text_size"
+            android:textStyle="bold"
+            tools:text="nameSong" />
+
+        <TextView
+            android:id="@+id/tvNameSingerItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/w9_icon_name_song_margin_left"
+            android:layout_marginBottom="@dimen/w9_icon_name_singer_margin_bottom"
+            android:layout_toStartOf="@+id/tvLengthSongItem"
+            android:layout_toEndOf="@+id/btnPlayItem"
+            android:lines="1"
+            android:singleLine="true"
+            android:textSize="@dimen/w9_icon_name_singer_text_size"
+            tools:text="nameSinger" />
+
+        <TextView
+            android:id="@+id/tvLengthSongItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/w9_icon_duration_margin_right"
+            android:layout_marginBottom="@dimen/w9_icon_duration_margin_bottom"
+            android:textSize="@dimen/w9_icon_duration_text_size"
+            tools:text="06:20" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

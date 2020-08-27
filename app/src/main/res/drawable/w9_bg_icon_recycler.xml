@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient android:startColor="@color/w9_background_start_color"
+        android:endColor="@color/w9_background_start_color"
+        android:centerColor="@color/w9_background_icon_recycler_center_color"
+        android:type="sweep"/>
+    <size android:height="@dimen/w9_item_recycler_height"/>
+</shape>
