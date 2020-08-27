@@ -9,6 +9,7 @@ import android.os.IBinder
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.huybui98.musicapplicationhuy.R
 import com.huybui98.musicapplicationhuy.fragments.SplashFragment
@@ -62,6 +63,10 @@ class MusicActivity : AppCompatActivity() {
         containerViewPager?.apply {
             adapter = viewPagerAdapter
         }
+    }
+
+    internal fun openNavigation(){
+        drawerLayout?.openDrawer(GravityCompat.START)
     }
 
     private fun handleReplaceFragment(

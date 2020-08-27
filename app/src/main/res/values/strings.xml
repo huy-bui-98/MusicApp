@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Music Player</string>
+    <string name="navigation_offline">Offline</string>
+    <string name="navigation_online">Online</string>
+    <string name="navigation_share">Chia sẻ nhạc</string>
 </resources>

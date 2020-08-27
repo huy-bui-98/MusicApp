@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.huybui98.musicapplicationhuy.R
 import com.huybui98.musicapplicationhuy.models.Song
-import kotlinx.android.synthetic.main.w9_item_recycler_song.view.*
+import kotlinx.android.synthetic.main.item_recycler_song.view.*
 
 /**
  * Created by huy-bui-98 on 08/21/20
@@ -23,7 +23,7 @@ class SongRecyclerAdapter(private val songList: List<Song>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val itemView =
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.w9_item_recycler_song, parent, false)
+                .inflate(R.layout.item_recycler_song, parent, false)
         return ItemViewHolder(itemView)
     }
 

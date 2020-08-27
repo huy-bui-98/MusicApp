@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/itemGarden"
+        android:icon="@drawable/ic_play_button"
+        android:title="@string/navigation_offline" />
+    <item
+        android:id="@+id/itemGrowVegetable"
+        android:icon="@drawable/ic_play_button"
+        android:title="@string/navigation_online" />
+    <item
+        android:id="@+id/itemHarvest"
+        android:icon="@drawable/ic_play_button"
+        android:title="@string/navigation_share" />
+</menu>

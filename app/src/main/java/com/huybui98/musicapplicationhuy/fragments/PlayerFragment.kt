@@ -10,8 +10,8 @@ import com.huybui98.musicapplicationhuy.R
 import com.huybui98.musicapplicationhuy.activitys.MusicActivity
 import com.huybui98.musicapplicationhuy.models.Song
 import com.huybui98.musicapplicationhuy.services.AudioService
-import kotlinx.android.synthetic.main.w9_fragment_music.*
-import kotlinx.android.synthetic.main.w9_fragment_player.*
+import kotlinx.android.synthetic.main.fragment_music.*
+import kotlinx.android.synthetic.main.fragment_player.*
 
 /**
  * Created by huy-bui-98 on 08/23/20
@@ -36,7 +36,7 @@ class PlayerFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.w9_fragment_player, container, false)
+        return inflater.inflate(R.layout.fragment_player, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

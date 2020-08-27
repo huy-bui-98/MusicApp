@@ -7,12 +7,20 @@
     android:background="@drawable/bg_music_app">
 
     <ImageView
+        android:id="@+id/btnHome.Music"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_hambuger_menu"/>
+
+    <ImageView
         android:id="@+id/imgLogo.Music"
         android:layout_width="@dimen/w9_music_logo_app_size"
         android:layout_height="@dimen/w9_music_logo_app_size"
         android:layout_centerHorizontal="true"
         android:src="@drawable/img_logo_music"
-        android:layout_marginTop="@dimen/w9_music_logo_margin_top" />
+        android:layout_marginTop="@dimen/w9_music_logo_margin_top"
+        tools:ignore="ContentDescription" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSongList"

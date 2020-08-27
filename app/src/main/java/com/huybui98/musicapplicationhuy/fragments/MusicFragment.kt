@@ -12,7 +12,7 @@ import com.huybui98.musicapplicationhuy.R
 import com.huybui98.musicapplicationhuy.activitys.MusicActivity
 import com.huybui98.musicapplicationhuy.services.AudioService
 import kotlinx.android.synthetic.main.activity_music.*
-import kotlinx.android.synthetic.main.w9_fragment_music.*
+import kotlinx.android.synthetic.main.fragment_music.*
 
 /**
  * Created by huy-bui-98 on 08/21/20
@@ -36,7 +36,7 @@ class MusicFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.w9_fragment_music, container, false)
+        return inflater.inflate(R.layout.fragment_music, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,6 +53,7 @@ class MusicFragment : Fragment() {
     private fun initView() {
         initPlayerBar()
         initMusicRecycler()
+        initSystemView()
     }
 
     private fun initPlayerBar() {
@@ -114,6 +115,12 @@ class MusicFragment : Fragment() {
 
         rlPlayerBar?.setOnClickListener {
             (activity as MusicActivity).containerViewPager.setCurrentItem(1, true)
+        }
+    }
+
+    private fun initSystemView(){
+        btnHome_Music?.setOnClickListener {
+            (activity as MusicActivity).openNavigation()
         }
     }
 
