@@ -19,8 +19,7 @@ import com.huybui98.musicapplicationhuy.notification.CreatePlayerNotification
 import com.huybui98.musicapplicationhuy.notification.NotificationBroadcastReceiver
 
 /**
- * Asian Tech Co., Ltd.
- * Created by at-huybui on 08/21/20
+ * Created by huy-bui-98 on 08/21/20
  * This is service class to play mp3
  */
 

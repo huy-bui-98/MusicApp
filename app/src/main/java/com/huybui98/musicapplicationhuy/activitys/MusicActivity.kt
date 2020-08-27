@@ -18,8 +18,7 @@ import com.huybui98.musicapplicationhuy.services.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_music.*
 
 /**
- * Asian Tech Co., Ltd.
- * Created by at-huybui on 08/21/20
+ * Created by huy-bui-98 on 08/21/20
  * This is activity class for main activity of music application
  */
 

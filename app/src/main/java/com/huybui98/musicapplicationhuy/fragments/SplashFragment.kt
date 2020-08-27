@@ -20,8 +20,7 @@ import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 
 /**
- * Asian Tech Co., Ltd.
- * Created by at-huybui on 08/21/20
+ * Created by huy-bui-98 on 08/21/20
  * This is fragment class for splash fragment of music application
  */
 

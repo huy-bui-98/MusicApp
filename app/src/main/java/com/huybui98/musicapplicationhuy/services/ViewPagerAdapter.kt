@@ -8,8 +8,7 @@ import com.huybui98.musicapplicationhuy.fragments.PlayerFragment
 import com.huybui98.musicapplicationhuy.models.Song
 
 /**
- * Asian Tech Co., Ltd.
- * Created by at-huybui on 08/24/20
+ * Created by huy-bui-98 on 08/24/20
  * This is class for adapter of view pager in music activity
  */
 

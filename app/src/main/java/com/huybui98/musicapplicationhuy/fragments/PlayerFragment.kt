@@ -14,8 +14,7 @@ import kotlinx.android.synthetic.main.w9_fragment_music.*
 import kotlinx.android.synthetic.main.w9_fragment_player.*
 
 /**
- * Asian Tech Co., Ltd.
- * Created by at-huybui on 08/23/20
+ * Created by huy-bui-98 on 08/23/20
  * This is fragment class for splash fragment of player application
  */
 

@@ -5,8 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 
 /**
- * Asian Tech Co., Ltd.
- * Created by at-huybui on 08/21/20
+ * Created by huy-bui-98 on 08/21/20
  * This is custom view class for dvd view
  */
 
