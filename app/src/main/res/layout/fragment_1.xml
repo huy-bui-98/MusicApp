@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingStart="30dp"
+    android:paddingEnd="30dp"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvF1"
+        android:background="#9C00FFB7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="xxxxxxx"
+        android:textSize="30sp"/>
+    <EditText
+        android:id="@+id/edtF1"
+        android:layout_below="@id/tvF1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnF1"
+        android:layout_below="@id/edtF1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fragment 1"/>
+</RelativeLayout>

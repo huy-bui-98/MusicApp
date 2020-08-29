@@ -1,11 +1,11 @@
 package com.huybui98.musicapplicationhuy.services
 
+import android.util.Log.d
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import com.huybui98.musicapplicationhuy.fragments.MusicFragment
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.huybui98.musicapplicationhuy.fragments.PlayerFragment
-import com.huybui98.musicapplicationhuy.models.Song
+import com.huybui98.musicapplicationhuy.fragments.MusicFragment
 
 /**
  * Created by huy-bui-98 on 08/24/20
@@ -13,9 +13,8 @@ import com.huybui98.musicapplicationhuy.models.Song
  */
 
 class ViewPagerAdapter(
-    fm: FragmentManager,
-    private val songLists: MutableList<Song>
-) : FragmentPagerAdapter(
+    fm: FragmentManager
+) : FragmentStatePagerAdapter(
     fm,
     BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 ) {
@@ -25,12 +24,13 @@ class ViewPagerAdapter(
     }
 
     override fun getItem(position: Int): Fragment {
-
         return if (position == 0) {
-            MusicFragment.newInstance(songLists)
+            d("adapter", "online")
+            MusicFragment.newInstance()
         } else {
-            PlayerFragment.newInstance(songLists)
+            PlayerFragment.newInstance()
         }
+
     }
     override fun getCount() = NUMBER_OF_PAGER
 }

@@ -1,18 +1,20 @@
 package com.huybui98.musicapplicationhuy.fragments
 
 import android.os.Bundle
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.huybui98.musicapplicationhuy.managers.SongRecyclerAdapter
-import com.huybui98.musicapplicationhuy.models.Song
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.huybui98.musicapplicationhuy.R
 import com.huybui98.musicapplicationhuy.activitys.MusicActivity
+import com.huybui98.musicapplicationhuy.models.SharedViewModel
+import com.huybui98.musicapplicationhuy.models.Song
 import com.huybui98.musicapplicationhuy.services.AudioService
 import kotlinx.android.synthetic.main.activity_music.*
-import kotlinx.android.synthetic.main.fragment_music.*
+import kotlinx.android.synthetic.main.fragment_test.*
 
 /**
  * Created by huy-bui-98 on 08/21/20
@@ -22,13 +24,11 @@ import kotlinx.android.synthetic.main.fragment_music.*
 class MusicFragment : Fragment() {
 
     companion object {
-        internal fun newInstance(songListsNew: MutableList<Song>) = MusicFragment().apply {
-            songListsNew.toCollection(songLists)
-        }
+        internal fun newInstance() = MusicFragment()
     }
 
+    private lateinit var viewModel: SharedViewModel
     private var songLists = mutableListOf<Song>()
-    private val songAdapter = SongRecyclerAdapter(songLists)
     private val service = MusicActivity.service
 
     override fun onCreateView(
@@ -36,13 +36,17 @@ class MusicFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_music, container, false)
+        return inflater.inflate(R.layout.fragment_test, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(activity as MusicActivity).get(SharedViewModel::class.java)
+        initData()
         initView()
         initAudioService()
+        bindOfflineFragment()
+        initListenerMenu()
     }
 
     override fun onDestroy() {
@@ -50,9 +54,46 @@ class MusicFragment : Fragment() {
         service.isOpenApp = false  // clear state is open app
     }
 
+    internal fun bindOfflineFragment() {
+        val fragment = MusicOfflineFragment.newInstance()
+        fragment.onItemOfflineClick = { position ->
+            service.songPosition = position
+            service.songLists.forEach {
+                d("ofline", it.nameSong.toString())
+            }
+            service.onMusicStart()
+            (activity as MusicActivity).viewPager.setCurrentItem(1, true)
+        }
+        (activity as MusicActivity).viewPager.setCurrentItem(0, true)
+        handleReplaceFragment(fragment)
+    }
+
+    internal fun bindOnlineFragment() {
+        val fragment = MusicOnlineFragment.newInstance()
+        (activity as MusicActivity).viewPager.setCurrentItem(0, true)
+        handleReplaceFragment(fragment)
+    }
+
+    internal fun handleReplaceFragment(
+        fragment: Fragment,
+        isBackStack: Boolean = false,
+        nameBackStack: String = ""
+    ) {
+        val fragmentManager = childFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.FrameMusicFragment, fragment)
+        if (isBackStack) {
+            fragmentTransaction.addToBackStack(nameBackStack)
+        }
+        fragmentTransaction.commit()
+    }
+
+    private fun initData() {
+        viewModel.listOffline.value?.toCollection(songLists)
+    }
+
     private fun initView() {
         initPlayerBar()
-        initMusicRecycler()
         initSystemView()
     }
 
@@ -78,20 +119,6 @@ class MusicFragment : Fragment() {
         }
     }
 
-    private fun initMusicRecycler() {
-        recyclerViewSongList?.apply {
-            adapter = songAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-            setHasFixedSize(true)
-        }
-
-        songAdapter.onItemClick = { position ->
-            service.songPosition = position
-            service.onMusicStart()
-            (activity as MusicActivity).containerViewPager.setCurrentItem(1, true)
-        }
-    }
-
     private fun initPlayerBarClickListener() {
         btnPlay_Music?.setOnClickListener {
             if (service.audioPlayer.isPlaying) {
@@ -114,11 +141,11 @@ class MusicFragment : Fragment() {
         }
 
         rlPlayerBar?.setOnClickListener {
-            (activity as MusicActivity).containerViewPager.setCurrentItem(1, true)
+            (activity as MusicActivity).viewPager.setCurrentItem(1, true)
         }
     }
 
-    private fun initSystemView(){
+    private fun initSystemView() {
         btnHome_Music?.setOnClickListener {
             (activity as MusicActivity).openNavigation()
         }
@@ -152,11 +179,20 @@ class MusicFragment : Fragment() {
                 }
             }
         }
+    }
 
-        service.onShuffleSong = {
-            songLists.clear()
-            service.songLists.toCollection(songLists)
-            songAdapter.notifyDataSetChanged()
-        }
+    private fun initListenerMenu(){
+        viewModel.displayFragment.observe(viewLifecycleOwner, Observer<SharedViewModel.MenuNavigation> { display ->
+            when(display){
+                SharedViewModel.MenuNavigation.OFFLINE ->{
+                    bindOfflineFragment()
+                }
+                SharedViewModel.MenuNavigation.ONLINE->{
+                    bindOnlineFragment()
+                }
+                else ->{
+                }
+            }
+        })
     }
 }

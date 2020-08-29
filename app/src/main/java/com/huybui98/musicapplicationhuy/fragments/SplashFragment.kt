@@ -13,9 +13,12 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.huybui98.musicapplicationhuy.R
 import com.huybui98.musicapplicationhuy.activitys.MusicActivity
+import com.huybui98.musicapplicationhuy.models.SharedViewModel
 import com.huybui98.musicapplicationhuy.models.Song
+import com.huybui98.musicapplicationhuy.services.ViewPagerAdapter
 import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 
@@ -38,8 +41,9 @@ class SplashFragment : Fragment() {
         private const val DATE_FORMAT = "dd.MM.yyyy"
     }
 
-    var listSong = mutableListOf<Song>()
+    private lateinit var viewModel: SharedViewModel
     var progressCount = 0
+    var songLists = mutableListOf<Song>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +55,7 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(activity as MusicActivity).get(SharedViewModel::class.java)
         handleProgressBar()
     }
 
@@ -71,11 +76,12 @@ class SplashFragment : Fragment() {
                     }
                     TICK_LOAD_DATA_MUSIC -> {
                         Thread(Runnable {
-                            scanSongInStore().toCollection(listSong)
+                             scanSongInStore().toCollection(songLists)
                         }).start()
                     }
                     PROGRESS_BAR_MAX_VALUE -> {
-                        (activity as MusicActivity).initViewPager(listSong)
+                        viewModel.setListOffline(songLists)
+                        (activity as MusicActivity).handleViewPager()
                         this.cancel()
                     }
                 }

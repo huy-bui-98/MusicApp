@@ -11,12 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.huybui98.musicapplicationhuy.R
 import com.huybui98.musicapplicationhuy.fragments.SplashFragment
-import com.huybui98.musicapplicationhuy.models.Song
+import com.huybui98.musicapplicationhuy.models.SharedViewModel
 import com.huybui98.musicapplicationhuy.services.AudioService
 import com.huybui98.musicapplicationhuy.services.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_music.*
+import kotlinx.android.synthetic.main.navigation_header.view.*
 
 /**
  * Created by huy-bui-98 on 08/21/20
@@ -41,15 +43,21 @@ class MusicActivity : AppCompatActivity() {
             }
         }
     }
+    private lateinit var viewModel: SharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_music)
+        // set viewModel
+        viewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+
         setColorStatusBar()
         handleReplaceFragment(SplashFragment.newInstance(), false)
+
         svc = Intent(this, service::class.java)
         bindService(svc, connection, Context.BIND_AUTO_CREATE)
         startService(svc)
+        initNavigation()
     }
 
     override fun onDestroy() {
@@ -58,25 +66,25 @@ class MusicActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    internal fun initViewPager(songLists: MutableList<Song>) {
-        val viewPagerAdapter by lazy { ViewPagerAdapter(supportFragmentManager, songLists) }
-        containerViewPager?.apply {
+    internal fun handleViewPager(){
+        val viewPagerAdapter by lazy { ViewPagerAdapter(supportFragmentManager) }
+        viewPager?.apply {
             adapter = viewPagerAdapter
         }
     }
 
-    internal fun openNavigation(){
+    internal fun openNavigation() {
         drawerLayout?.openDrawer(GravityCompat.START)
     }
 
-    private fun handleReplaceFragment(
+    internal fun handleReplaceFragment(
         fragment: Fragment,
         isBackStack: Boolean = false,
         nameBackStack: String = ""
     ) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.containerMain, fragment)
+        fragmentTransaction.replace(R.id.frameLayoutMain, fragment)
         if (isBackStack) {
             fragmentTransaction.addToBackStack(nameBackStack)
         }
@@ -89,6 +97,20 @@ class MusicActivity : AppCompatActivity() {
                 ContextCompat.getColor(this, R.color.w9_status_bar)
             window.decorView.systemUiVisibility =
                 window.decorView.systemUiVisibility.and(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv())
+        }
+    }
+
+    private fun initNavigation() {
+        navigationView?.getHeaderView(0)?.let { header ->
+            header.btnOnlineNavigation?.setOnClickListener {
+                viewModel.setDisplay(SharedViewModel.MenuNavigation.ONLINE)
+                drawerLayout?.closeDrawer(GravityCompat.START)
+            }
+
+            header.btnOffline_Navigation?.setOnClickListener {
+                viewModel.setDisplay(SharedViewModel.MenuNavigation.OFFLINE)
+                drawerLayout?.closeDrawer(GravityCompat.START)
+            }
         }
     }
 }

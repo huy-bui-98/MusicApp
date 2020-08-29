@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.huybui98.musicapplicationhuy.R
 import com.huybui98.musicapplicationhuy.activitys.MusicActivity
+import com.huybui98.musicapplicationhuy.models.SharedViewModel
 import com.huybui98.musicapplicationhuy.models.Song
 import com.huybui98.musicapplicationhuy.services.AudioService
-import kotlinx.android.synthetic.main.fragment_music.*
+import kotlinx.android.synthetic.main.fragment_music_offline.*
 import kotlinx.android.synthetic.main.fragment_player.*
 
 /**
@@ -21,12 +23,11 @@ import kotlinx.android.synthetic.main.fragment_player.*
 class PlayerFragment : Fragment() {
 
     companion object {
-        internal fun newInstance(lists: MutableList<Song>) = PlayerFragment().apply {
-            lists.toCollection(songLists)
-        }
+        internal fun newInstance() = PlayerFragment()
         private const val DEFAULT_DURATION = "00:00"
     }
 
+    private lateinit var viewModel: SharedViewModel
     private var songLists = mutableListOf<Song>()
     private val service = MusicActivity.service
     private var isUpdateSeekBar = false
@@ -40,8 +41,14 @@ class PlayerFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel = ViewModelProvider(activity as MusicActivity).get(SharedViewModel::class.java)
         super.onViewCreated(view, savedInstanceState)
+        initData()
         initView()
+    }
+
+    private fun initData() {
+        viewModel.listOffline.value?.toCollection(songLists)
     }
 
     private fun initView() {
@@ -70,8 +77,8 @@ class PlayerFragment : Fragment() {
                 btnPlay_Player?.setImageResource(R.drawable.ic_pause_button)
                 imgDvd_Player?.startAnim()
             } else {
-                imgDvd_Player?.setImageResource(R.drawable.ic_play_button)
-                imgDvd_Music?.endAnim()
+                btnPlay_Player?.setImageResource(R.drawable.ic_play_button)
+                imgDvd_Player?.endAnim()
             }
         }
     }
